@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketajaman Mata & Tes Buta Warna</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="app">
+
+        <!-- MENU UTAMA -->
+        <section id="menu" class="screen menu-screen">
+
+            <!-- PILIHAN BAHASA -->
+            <div class="language-switcher">
+                <label for="pilihanBahasa" id="labelBahasa">Bahasa:</label>
+                <select id="pilihanBahasa" onchange="ubahBahasa(this.value)">
+                    <option value="id">🇮🇩 Indonesia</option>
+                    <option value="en">🇬🇧 English</option>
+                </select>
+            </div>
+
+            <div class="menu-decoration">✦　👁️　✦</div>
+
+            <p class="eyebrow">UJI FOKUS DAN KETELITIAN</p>
+
+            <h1>Ketajaman<br><span>Mata</span></h1>
+
+            <p class="menu-desc">
+                Temukan kotak dengan warna yang berbeda atau uji mata Anda!
+            </p>
+
+            <div class="menu-preview">
+                <span>🟦</span>
+                <span>🟦</span>
+                <span>🩵</span>
+                <span>🟦</span>
+            </div>
+
+            <button class="main-button play-button" onclick="mulaiGame()">
+                ▶ MULAI GAME KOTAK PERBEDAAN WARNA
+            </button>
+
+            <button class="main-button practice-button" onclick="bukaLatihan()">
+                👁 LATIHAN TES BUTA WARNA ANGKA
+            </button>
+
+            <button class="main-button info-button" onclick="lihatPetunjuk()">
+                ❔ PETUNJUK PERMAINAN
+            </button>
+
+            <!-- TOMBOL PENGATURAN -->
+            <button class="main-button info-button" onclick="bukaPengaturan()">
+                ⚙️ PENGATURAN
+            </button>
+
+            <!-- PAPAN SKOR MENU -->
+            <div class="papan-skor-container papan-skor-menu">
+                <h2>🏆 PAPAN SKOR</h2>
+
+                <div id="papanSkorMenu">
+                    <p class="skor-kosong">Belum ada riwayat permainan.</p>
+                </div>
+
+                <button type="button" class="reset-skor" onclick="resetPapanSkor()">
+                    RESET PAPAN SKOR
+                </button>
+            </div>
+
+            <p class="menu-footer">LATIH KETELITIANMU SEKARANG!</p>
+        </section>
+
+        <!-- HALAMAN PENGATURAN -->
+        <section id="pengaturan" class="screen settings-screen" style="display:none">
+
+            <div class="settings-container">
+
+                <h2>⚙️ PENGATURAN GAME</h2>
+
+                <div class="pengaturan-item">
+                    <div>
+                        <strong>🎵 Musik Latar</strong>
+                        <p>Atur musik selama permainan.</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="tombolMusik"
+                        onclick="toggleMusik()"
+                        aria-pressed="true">
+                        ON
+                    </button>
+                </div>
+
+                <div class="pengaturan-item">
+                    <div>
+                        <strong>🔊 Efek Suara</strong>
+                        <p>Atur suara jawaban benar dan salah.</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="tombolAudio"
+                        onclick="toggleAudio()"
+                        aria-pressed="true">
+                        ON
+                    </button>
+                </div>
+
+                <button class="main-button info-button"
+                        onclick="kembaliMenu()">
+                    ← KEMBALI KE MENU UTAMA
+                </button>
+
+            </div>
+        </section>
+
+        <!-- GAME UTAMA -->
+        <section id="game" class="screen game-screen" style="display:none">
+
+            <header class="game-header">
+                <button class="back-button" onclick="konfirmasiMenu()">← Menu</button>
+                <span class="brand-small">KETAJAMAN MATA</span>
+            </header>
+
+            <div class="level-heading">
+                <p class="eyebrow">TAHAP PERMAINAN</p>
+                <h2 id="judulLevel">LEVEL 1</h2>
+                <p id="tingkatText">Tingkat 1 dari 5</p>
+            </div>
+
+            <div class="timer-box">
+                <span id="timer">10</span>
+                <span class="timer-label">DETIK</span>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-icon">★</span>
+                    <small>SKOR</small>
+                    <strong id="skor">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">◆</span>
+                    <small>PROGRES</small>
+                    <strong id="progres">1/25</strong>
+                </div>
+            </div>
+
+            <section class="puzzle-card">
+                <h3>Temukan warna yang berbeda!</h3>
+                <p class="puzzle-desc">Pilih satu kotak yang paling berbeda.</p>
+                <div id="papan" class="papan"></div>
+                <p id="pesan" class="pesan">
+                    Temukan satu kotak yang warnanya berbeda!
+                </p>
+            </section>
+        </section>
+
+        <!-- HALAMAN TES BUTA WARNA -->
+        <section id="latihan" class="screen practice-screen" style="display:none">
+
+            <header class="practice-header">
+                <button class="practice-back" onclick="kembaliMenu()">←</button>
+                <h2>Tes Buta Warna Angka</h2>
+            </header>
+
+            <div id="daftarLatihan" class="practice-grid">
+
+                <button class="practice-card" onclick="bukaTesButaWarna()">
+                    <span class="practice-icon">🔢</span>
+                    <strong>Tes Buta Warna Angka</strong>
+                    <small>Tebak angka pada plat Ishihara</small>
+                </button>
+
+            </div>
+
+            <!-- AREA TES BUTA WARNA -->
+            <div id="halamanTesMata" class="eye-test" style="display:none">
+
+                <button class="practice-back" onclick="kembaliDaftarLatihan()">
+                    ← Kembali
+                </button>
+
+                <h2 id="judulTes">Tes Buta Warna Angka</h2>
+
+                <p id="deskripsiTes"></p>
+
+                <div id="areaTes" class="test-area"></div>
+
+                <p id="hasilTes" class="test-result"></p>
+
+                <button id="tombolTes" class="test-action" onclick="aksiTesMata()">
+                    Mulai Tes
+                </button>
+
+            </div>
+        </section>
+
+        <!-- HALAMAN HASIL -->
+        <section id="hasil" class="screen result-screen" style="display:none">
+
+            <div id="ikonHasil" class="result-icon">🏆</div>
+
+            <p class="eyebrow">HASIL PERMAINAN</p>
+
+            <h2 id="judulHasil">Hebat!</h2>
+
+            <p id="pesanHasil">Permainan selesai.</p>
+
+            <div class="final-score">
+                <small>SKOR AKHIR</small>
+                <strong id="hasilSkor">0</strong>
+            </div>
+
+            <p id="waktuAkhir"></p>
+
+            <div class="papan-skor-container">
+                <h2>🏆 PAPAN SKOR</h2>
+
+                <div id="papanSkor">
+                    <p class="skor-kosong">Belum ada riwayat permainan.</p>
+                </div>
+
+                <button type="button" class="reset-skor" onclick="resetPapanSkor()">
+                    RESET PAPAN SKOR
+                </button>
+            </div>
+
+            <button id="tombolUlang" class="main-button play-button" onclick="mulaiGame()">
+                ↻ MAIN LAGI
+            </button>
+
+            <button class="main-button info-button" onclick="kembaliMenu()">
+                ← MENU UTAMA
+            </button>
+        </section>
+
+        <!-- MODAL PETUNJUK -->
+        <div id="modalPetunjuk" class="modal" style="display:none">
+
+            <div class="modal-content">
+                <button class="modal-close" onclick="tutupPetunjuk()">×</button>
+
+                <h2>Petunjuk Permainan</h2>
+
+                <p>1. Pilih satu kotak yang warnanya berbeda pada mode game.</p>
+
+                <p>2. Buka menu Tes Buta Warna Angka untuk memulai tes.</p>
+
+                <p>3. Masukkan angka yang tepat untuk lanjut ke soal berikutnya.</p>
+
+                <button class="test-action" onclick="tutupPetunjuk()">
+                    MENGERTI
+                </button>
+            </div>
+        </div>
+
+        <!-- MODAL KONFIRMASI RESET -->
+        <div id="modalKonfirmasiReset" class="modal" style="display:none"
+             role="dialog" aria-modal="true" aria-labelledby="judulReset">
+
+            <div class="modal-content">
+                <h2 id="judulReset">Hapus semua riwayat?</h2>
+
+                <p>
+                    Semua riwayat permainan akan dihapus permanen.
+                    Tindakan ini tidak dapat dibatalkan.
+                </p>
+
+                <div class="konfirmasi-actions">
+                    <button type="button" class="reset-batal"
+                            onclick="batalResetPapanSkor()">
+                        TIDAK
+                    </button>
+
+                    <button type="button" class="reset-ya"
+                            onclick="konfirmasiResetPapanSkor()">
+                        YA, HAPUS
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL LEVEL -->
+        <div id="modalLevel" class="level-modal" style="display:none">
+
+            <div class="level-modal-card">
+                <div class="level-glow"></div>
+
+                <div class="level-trophy">✦</div>
+
+                <p class="level-badge">LEVEL SELESAI</p>
+
+                <h2 id="judulModalLevel">HEBAT!</h2>
+
+                <p id="pesanModalLevel">
+                    Kamu berhasil menyelesaikan level ini.
+                </p>
+
+                <div class="next-level-box">
+                    <span>LEVEL BERIKUTNYA</span>
+                    <strong id="angkaLevelBerikutnya">LEVEL 2</strong>
+                </div>
+
+                <div class="countdown-circle">
+                    <strong id="hitungMundurLevel">3</strong>
+                    <small>DETIK</small>
+                </div>
+
+                <p class="auto-next-text">
+                    Bersiaplah! Permainan berlanjut otomatis.
+                </p>
+
+                <button class="next-level-button" onclick="lanjutLevelSekarang()">
+                    LANJUT SEKARANG →
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MUSIK LATAR -->
+    <audio
+        id="musikLatar"
+        src="asset/musik geme.mp3"
+        loop
+        preload="auto">
+    </audio>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

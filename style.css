@@ -1,0 +1,1373 @@
+
+:root {
+    --bg: #0b1025;
+    --panel: #151d3b;
+    --panel-light: #202b50;
+    --cyan: #62eaff;
+    --purple: #a783ff;
+    --yellow: #ffe36e;
+    --green: #16e99b;
+    --white: #f5f7ff;
+    --muted: #aab6d7;
+    --danger: #ff6685;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--bg);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--white);
+    background: radial-gradient(ellipse at top, #202e59 0%, transparent 55%), linear-gradient(160deg, #0b1025, #11132e 65%, #191238);
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 20px 16px 32px;
+}
+
+.screen {
+    width: 100%;
+}
+
+/* MENU UTAMA */
+
+.menu-screen {
+    display: flex;
+    min-height: calc(100vh - 52px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 24px 4px;
+    position: relative;
+}
+
+/* PILIHAN BAHASA */
+
+.language-switcher {
+    position: absolute;
+    top: 10px;
+    left: 8px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 11px;
+    border: 1px solid rgba(98,234,255,.35);
+    border-radius: 12px;
+    background: linear-gradient(145deg, #202b50, #151d3b);
+    box-shadow: 0 4px 15px rgba(0,0,0,.25);
+}
+
+.language-switcher label {
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.language-switcher select {
+    max-width: 125px;
+    padding: 4px;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    background: #202b50;
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.language-switcher select option {
+    background: #151d3b;
+    color: var(--white);
+}
+
+.menu-decoration {
+    margin-bottom: 24px;
+    color: var(--yellow);
+    font-size: 28px;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255,227,110,.5);
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.menu-screen .eyebrow {
+    text-align: center;
+}
+
+.menu-screen h1 {
+    margin: 8px 0 18px;
+    font-size: clamp(44px,12vw,64px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    text-align: center;
+    background: linear-gradient(135deg,#fff,var(--cyan),var(--purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.menu-screen h1 span {
+    color: var(--cyan);
+}
+
+.menu-desc {
+    margin: 8px 0 22px;
+    color: #d6def8;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.menu-preview {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 4px 0 26px;
+}
+
+.menu-preview span {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 12px;
+    background: #202b50;
+    font-size: 27px;
+    box-shadow: 0 5px 16px rgba(0,0,0,.2);
+}
+
+.menu-preview span:nth-child(3) {
+    border: 2px solid var(--cyan);
+    box-shadow: 0 0 20px rgba(98,234,255,.25);
+}
+
+.main-button {
+    display: block;
+    width: 100%;
+    min-height: 54px;
+    margin: 7px 0;
+    padding: 14px 12px;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 15px;
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .6px;
+    transition: .2s;
+}
+
+.play-button {
+    border: none;
+    background: linear-gradient(135deg,#16e99b,#00bfc8);
+    color: #09273a;
+    box-shadow: 0 7px 22px rgba(0,220,180,.18);
+}
+
+.practice-button {
+    background: linear-gradient(135deg,#6650cb,#9a63df);
+}
+
+.info-button {
+    background: var(--panel-light);
+}
+
+.main-button:hover {
+    filter: brightness(1.1);
+}
+
+.menu-footer {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* PENGATURAN MUSIK DAN AUDIO */
+
+.pengaturan-audio {
+    width: 100%;
+    max-width: 420px;
+    margin: 22px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background: linear-gradient(145deg,#202b50,#151d3b);
+    border: 1px solid rgba(98,234,255,.35);
+    border-radius: 18px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.25);
+}
+
+.pengaturan-audio h2 {
+    margin: 0 0 18px;
+    color: var(--cyan);
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    text-align: center;
+}
+
+.pengaturan-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+    padding: 13px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 13px;
+    background: rgba(255,255,255,.07);
+}
+
+.pengaturan-item span {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pengaturan-item button {
+    min-width: 75px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 11px;
+    background: linear-gradient(135deg,#16e99b,#00bfc8);
+    color: #09273a;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.pengaturan-item button.nonaktif {
+    background: linear-gradient(135deg,#ff6685,#d93660);
+    color: white;
+}
+
+.pengaturan-item button:hover {
+    filter: brightness(1.1);
+}
+
+.pengaturan-item button:active {
+    transform: scale(.95);
+}
+
+/* HEADER GAME */
+
+.game-screen {
+    padding-bottom: 24px;
+}
+
+.game-header,
+.practice-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.back-button,
+.practice-back {
+    padding: 10px 13px;
+    border: 1px solid #34446d;
+    border-radius: 12px;
+    background: var(--panel);
+    color: var(--white);
+    font-size: 13px;
+}
+
+.brand-small {
+    color: var(--cyan);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.level-heading {
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.level-heading .eyebrow {
+    margin-bottom: 6px;
+}
+
+.level-heading h2 {
+    margin: 0;
+    color: var(--yellow);
+    font-size: 34px;
+    letter-spacing: 1px;
+}
+
+.level-heading p:last-child {
+    margin: 8px 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* TIMER DAN STATISTIK */
+
+.timer-box {
+    display: flex;
+    width: 112px;
+    min-height: 90px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    margin: 0 auto 20px;
+    border: 2px solid rgba(98,234,255,.35);
+    border-radius: 22px;
+    background: linear-gradient(145deg,#1d2c54,#151b3b);
+    box-shadow: 0 0 24px rgba(98,234,255,.08);
+}
+
+#timer {
+    color: var(--cyan);
+    font-size: 36px;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-label {
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 9px;
+    margin-bottom: 18px;
+}
+
+.stat-card {
+    display: flex;
+    min-height: 90px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid #29375f;
+    border-radius: 16px;
+    background: linear-gradient(145deg,#1b2548,#141a35);
+}
+
+.stat-icon {
+    color: var(--yellow);
+    font-size: 18px;
+}
+
+.stat-card small {
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: .7px;
+    text-align: center;
+}
+
+.stat-card strong {
+    color: var(--white);
+    font-size: 23px;
+}
+
+/* PAPAN KOTAK WARNA */
+
+.puzzle-card {
+    padding: 18px 12px;
+    border: 1px solid #2c3a62;
+    border-radius: 22px;
+    background: linear-gradient(145deg,#182344,#11182f);
+    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+
+.puzzle-card h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.puzzle-desc {
+    margin: 0 0 18px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.papan {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 7px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.kotak {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 1/1;
+    padding: 0;
+    border: 2px solid rgba(255,255,255,.08);
+    border-radius: 9px;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.15);
+    transition: transform .12s,border-color .12s;
+}
+
+.kotak:active {
+    transform: scale(.92);
+    border-color: white;
+}
+
+.pesan {
+    min-height: 22px;
+    margin: 16px 0 0;
+    color: var(--cyan);
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* LATIHAN MATA */
+
+.practice-screen {
+    padding-bottom: 24px;
+}
+
+.practice-header {
+    justify-content: flex-start;
+}
+
+.practice-header h2 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.practice-back {
+    min-width: 42px;
+    font-size: 18px;
+}
+
+.practice-tabs {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 5px;
+    margin-bottom: 18px;
+    padding: 5px;
+    border: 1px solid #29375f;
+    border-radius: 14px;
+    background: #11182f;
+}
+
+.practice-tabs button {
+    min-width: 0;
+    padding: 10px 3px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.practice-tabs button.tab-active {
+    background: linear-gradient(135deg,#6650cb,#895fe0);
+    color: white;
+}
+
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+}
+
+.practice-card {
+    display: flex;
+    min-width: 0;
+    min-height: 155px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 13px;
+    border: 1px solid #2b3b65;
+    border-radius: 18px;
+    background: linear-gradient(145deg,#202b50,#151b37);
+    color: var(--white);
+    text-align: left;
+    transition: .2s;
+}
+
+.practice-card:hover {
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+}
+
+.practice-icon {
+    font-size: 35px;
+}
+
+.practice-card strong {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.practice-card small {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.practice-note {
+    margin-top: 22px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(98,234,255,.06);
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* HALAMAN TES MATA */
+
+.eye-test {
+    padding: 16px 12px;
+    border: 1px solid #2b3b65;
+    border-radius: 20px;
+    background: var(--panel);
+}
+
+.eye-test h2 {
+    margin: 18px 0 10px;
+    font-size: 23px;
+}
+
+.eye-test > p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.test-area {
+    display: flex;
+    min-height: 190px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 18px 0;
+    padding: 15px;
+    border: 1px solid #2b3b65;
+    border-radius: 16px;
+    background: #0d142b;
+    text-align: center;
+}
+
+.test-shape {
+    width: 100%;
+    color: var(--cyan);
+    font-size: 52px;
+    text-align: center;
+}
+
+.test-choice {
+    min-width: 55px;
+    min-height: 55px;
+    padding: 10px;
+    border: 1px solid #5369a1;
+    border-radius: 13px;
+    background: #202b50;
+    color: white;
+    font-size: 25px;
+}
+
+.test-choice:hover {
+    border-color: var(--cyan);
+    background: #2c3d6c;
+}
+
+.test-action {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(135deg,#16e99b,#00bfc8);
+    color: #09273a;
+    font-weight: 800;
+}
+
+.test-result {
+    color: var(--yellow) !important;
+    text-align: center;
+}
+
+/* HALAMAN HASIL */
+
+.result-screen {
+    display: flex;
+    min-height: calc(100vh - 52px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 4px;
+    text-align: center;
+}
+
+.result-icon {
+    display: grid;
+    width: 100px;
+    height: 100px;
+    place-items: center;
+    margin-bottom: 22px;
+    border: 1px solid rgba(255,227,110,.4);
+    border-radius: 30px;
+    background: linear-gradient(145deg,#34365d,#202344);
+    font-size: 48px;
+    box-shadow: 0 0 35px rgba(255,227,110,.1);
+}
+
+.result-screen h2 {
+    margin: 6px 0;
+    color: var(--yellow);
+    font-size: 31px;
+}
+
+.result-screen > p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.final-score {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+    margin: 20px 0;
+    padding: 22px;
+    border: 1px solid #334574;
+    border-radius: 18px;
+    background: var(--panel);
+}
+
+.final-score small {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.final-score strong {
+    color: var(--cyan);
+    font-size: 42px;
+}
+
+/* MODAL UMUM */
+
+.modal {
+    position: fixed;
+    z-index: 900;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow-y: auto;
+    padding: 18px;
+    background: rgba(5,10,30,.85);
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 25px 20px;
+    border: 1px solid #3b4e7d;
+    border-radius: 22px;
+    background: linear-gradient(145deg,#202e59,#15142f);
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+
+.modal-content h2 {
+    padding-right: 25px;
+    color: var(--cyan);
+    font-size: 22px;
+}
+
+.modal-content p {
+    color: #d5def7;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    background: #303d63;
+    color: white;
+    font-size: 24px;
+}
+
+.konfirmasi-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.konfirmasi-actions button {
+    min-height: 48px;
+    padding: 10px;
+    border: 0;
+    border-radius: 12px;
+    font-weight: 800;
+}
+
+.reset-batal {
+    background: #34446d;
+    color: white;
+}
+
+.reset-ya {
+    background: linear-gradient(135deg,#ff6685,#d93660);
+    color: white;
+}
+
+/* NOTIFIKASI PINDAH LEVEL */
+
+.level-modal {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow-y: auto;
+    padding: 18px;
+    background: rgba(5,10,30,.88);
+    backdrop-filter: blur(9px);
+    animation: modalMuncul .3s ease;
+}
+
+.level-modal-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    max-width: 370px;
+    padding: 28px 20px 23px;
+    border: 1px solid rgba(120,233,255,.55);
+    border-radius: 28px;
+    background: linear-gradient(150deg,#253d70,#35165f 75%);
+    box-shadow: 0 0 45px rgba(78,117,255,.3);
+    text-align: center;
+}
+
+.level-glow {
+    position: absolute;
+    z-index: -1;
+    top: -100px;
+    left: 50%;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    background: rgba(66,224,255,.2);
+    filter: blur(45px);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.level-trophy {
+    display: grid;
+    width: 76px;
+    height: 76px;
+    place-items: center;
+    margin: 0 auto 14px;
+    border: 2px solid rgba(255,227,110,.8);
+    border-radius: 24px;
+    background: linear-gradient(135deg,#ffdc68,#ff9f43);
+    color: #40245e;
+    font-size: 42px;
+    box-shadow: 0 0 28px rgba(255,211,84,.25);
+    animation: bintangBergerak 2s ease-in-out infinite;
+}
+
+.level-badge {
+    display: inline-block;
+    margin: 0;
+    padding: 7px 13px;
+    border: 1px solid rgba(120,233,255,.35);
+    border-radius: 20px;
+    background: rgba(120,233,255,.1);
+    color: var(--cyan);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.level-modal-card h2 {
+    margin: 16px 0 8px;
+    color: var(--yellow);
+    font-size: clamp(25px,7vw,34px);
+    overflow-wrap: anywhere;
+}
+
+.level-modal-card > p:not(.level-badge):not(.auto-next-text) {
+    color: #e0e7ff;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.next-level-box {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin: 22px 0 18px;
+    padding: 17px;
+    border: 1px solid rgba(120,233,255,.28);
+    border-radius: 18px;
+    background: rgba(8,19,49,.5);
+}
+
+.next-level-box span {
+    color: #b7c8ef;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.next-level-box strong {
+    color: var(--cyan);
+    font-size: 26px;
+}
+
+.countdown-circle {
+    display: flex;
+    width: 72px;
+    height: 72px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1px;
+    margin: 0 auto;
+    border: 3px solid var(--green);
+    border-radius: 50%;
+    background: rgba(22,233,155,.09);
+    box-shadow: 0 0 20px rgba(22,233,155,.15);
+}
+
+.countdown-circle strong {
+    color: var(--green);
+    font-size: 27px;
+    line-height: 1;
+}
+
+.countdown-circle small {
+    color: #c3ffe6;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.auto-next-text {
+    margin: 14px 0;
+    color: #cbd7f4;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.next-level-button {
+    width: 100%;
+    min-height: 51px;
+    padding: 12px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg,#16e99b,#00bfc8);
+    color: #102b43;
+    font-weight: 900;
+    letter-spacing: .5px;
+    box-shadow: 0 5px 0 rgba(0,0,0,.17);
+}
+
+.next-level-button:hover {
+    filter: brightness(1.08);
+}
+
+/* ANIMASI */
+
+@keyframes modalMuncul {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes kartuMuncul {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes bintangBergerak {
+    0%,100% {
+        transform: translateY(0) rotate(-4deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(4deg);
+    }
+}
+
+.answer-notification {
+    position: fixed;
+    z-index: 2000;
+    top: 22%;
+    left: 50%;
+    width: max-content;
+    max-width: calc(100% - 32px);
+    padding: 16px 24px;
+    border: 1px solid rgba(22,233,155,.7);
+    border-radius: 18px;
+    background: linear-gradient(135deg,#123f40,#12664f);
+    color: white;
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(22,233,155,.3);
+    pointer-events: none;
+    animation: notifBenar .85s ease both;
+}
+
+.answer-notification span {
+    display: block;
+    margin-top: 5px;
+    color: #8dffce;
+    font-size: 13px;
+}
+
+@keyframes notifBenar {
+    0% {
+        opacity: 0;
+        transform: translate(-50%,18px) scale(.8);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%,0) scale(1.05);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translate(-50%,0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%,-12px) scale(.95);
+    }
+}
+
+/* PAPAN SKOR */
+
+.papan-skor-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 22px auto;
+    padding: 18px;
+    box-sizing: border-box;
+    border: 1px solid rgba(98,234,255,.4);
+    border-radius: 18px;
+    background: var(--panel);
+}
+
+.papan-skor-container h2 {
+    color: var(--cyan);
+    text-align: center;
+    font-size: 20px;
+}
+
+.skor-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--panel-light);
+    color: var(--white);
+}
+
+.skor-item p {
+    width: 100%;
+    margin: 0;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+}
+
+.status-menang {
+    color: var(--green);
+    font-weight: bold;
+}
+
+.status-kalah {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+.skor-kosong {
+    color: var(--muted);
+    text-align: center;
+}
+
+.reset-skor {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--danger);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#waktuAkhir {
+    color: var(--yellow);
+    font-weight: bold;
+    text-align: center;
+}
+
+.papan-skor-menu {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto 0;
+    padding: 16px;
+    border: 1px solid rgba(98,234,255,.4);
+    border-radius: 18px;
+    background: linear-gradient(145deg,#202b50,#151b37);
+    box-shadow: 0 8px 25px rgba(0,0,0,.2);
+}
+
+.papan-skor-menu h2 {
+    margin-top: 0;
+    color: var(--cyan);
+    font-size: 18px;
+    text-align: center;
+}
+
+.papan-skor-menu #papanSkorMenu {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.papan-skor-menu .skor-item {
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.papan-skor-menu .reset-skor {
+    background: linear-gradient(135deg,#ff6685,#d93660);
+}
+
+.papan-skor-menu .skor-kosong {
+    padding: 12px 0;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 380px) {
+    .app {
+        padding: 12px 10px 24px;
+    }
+
+    .menu-screen h1 {
+        font-size: 46px;
+    }
+
+    .menu-preview {
+        gap: 7px;
+    }
+
+    .menu-preview span {
+        width: 42px;
+        height: 42px;
+        font-size: 23px;
+    }
+
+    .game-screen {
+        padding: 8px 0;
+    }
+
+    .stat-card {
+        min-height: 82px;
+    }
+
+    .stat-card small {
+        font-size: 8px;
+    }
+
+    .puzzle-card {
+        padding: 14px 8px;
+    }
+
+    .papan {
+        gap: 5px;
+    }
+
+    .kotak {
+        border-radius: 5px;
+    }
+
+    .practice-grid {
+        gap: 8px;
+    }
+
+    .practice-card {
+        min-height: 140px;
+        padding: 12px 10px;
+    }
+
+    .practice-icon {
+        font-size: 30px;
+    }
+
+    .practice-card strong {
+        font-size: 12px;
+    }
+
+    .level-modal {
+        padding: 12px;
+    }
+
+    .level-modal-card {
+        padding: 23px 15px 19px;
+    }
+
+    .level-trophy {
+        width: 65px;
+        height: 65px;
+        font-size: 35px;
+    }
+
+    .papan-skor-container {
+        padding: 14px;
+    }
+}
+
+/* INPUT TES BUTA WARNA */
+
+.input-buta-warna {
+    padding: 12px;
+    font-size: 18px;
+    width: 70%;
+    border: 2px solid var(--cyan);
+    border-radius: 12px;
+    background: #0d142b;
+    color: white;
+    text-align: center;
+    margin: 10px 0;
+    outline: none;
+}
+
+/* GAMBAR PLAT ISHIHARA */
+
+.plate-image-box {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 15px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--cyan);
+}
+
+.plate-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* RESPONSIVE PILIHAN BAHASA */
+
+@media (max-width: 480px) {
+    .language-switcher {
+        top: 8px;
+        left: 5px;
+        padding: 7px 8px;
+        gap: 5px;
+    }
+
+    .language-switcher label {
+        font-size: 10px;
+    }
+
+    .language-switcher select {
+        max-width: 115px;
+        font-size: 10px;
+    }
+}
+
+/* HALAMAN PENGATURAN */
+
+.settings-screen {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 52px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 4px;
+    box-sizing: border-box;
+}
+
+.settings-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 22px auto;
+    padding: 22px;
+    box-sizing: border-box;
+    background: linear-gradient(145deg,#202b50,#151d3b);
+    border: 1px solid rgba(98,234,255,.35);
+    border-radius: 20px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.25);
+}
+
+.settings-container h2 {
+    margin: 0 0 25px;
+    color: var(--cyan);
+    font-size: 20px;
+    text-align: center;
+}
+
+.settings-container .pengaturan-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 14px;
+}
+
+.settings-container .pengaturan-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--white);
+}
+
+.settings-container .pengaturan-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.settings-container .pengaturan-item button {
+    min-width: 75px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg,#16e99b,#00bfc8);
+    color: #09273a;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.settings-container .pengaturan-item button.nonaktif {
+    background: linear-gradient(135deg,#ff6685,#d93660);
+    color: white;
+}
+
+.settings-container .pengaturan-item button:hover {
+    filter: brightness(1.1);
+}
+
+.settings-container .pengaturan-item button:active {
+    transform: scale(.95);
+}
+
+/* RESPONSIVE PENGATURAN */
+
+@media (max-width: 380px) {
+    .settings-screen {
+        padding: 15px 4px;
+    }
+
+    .settings-container {
+        padding: 15px;
+    }
+
+    .settings-container h2 {
+        font-size: 17px;
+    }
+
+    .settings-container .pengaturan-item {
+        padding: 12px;
+    }
+
+    .settings-container .pengaturan-item button {
+        min-width: 65px;
+        padding: 9px 12px;
+    }
+}
